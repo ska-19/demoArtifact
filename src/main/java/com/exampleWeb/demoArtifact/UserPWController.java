@@ -19,9 +19,11 @@ public class UserPWController {
     private List<UserPW> UserList = new ArrayList<>();
 
     // 1) Добавляет пользователя в список
-    /* curl -X POST http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"Kirill","password":"qwe123","age": 17}'
-    * curl -X POST http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"updateKirill","password":"qwe12223","age": 23}'
-    * */
+    /*
+    curl -X POST http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"Kirill","password":"qwe","age": 17}'
+    curl -X POST http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"updateKirill","password":"qweaaa","age": 23}'
+    curl -X POST http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"adminD","password":"qqqqq","age": 12}'
+    */
     @PostMapping("userList")
     public void addUser(@RequestBody UserPW user) throws ErrorUsernameOrPassword, ErrorSameName {
 
@@ -41,9 +43,10 @@ public class UserPWController {
 //    @RequestMapping(method = RequestMethod.PUT)
 
     // 2) Выводит пользователя по имени
-    /* curl -X GET http://localhost:8080/userList -H 'Content-Type: application/json' -d 'Kirill'
-    * curl -X GET http://localhost:8080/userList -H 'Content-Type: application/json' -d '"adminKirill"'
-    * */
+    /*
+    curl -X GET http://localhost:8080/userList -H 'Content-Type: application/json' -d 'Kirill'
+    curl -X GET http://localhost:8080/userList -H 'Content-Type: application/json' -d '"adminKirill"'
+    */
     @GetMapping("userList")
     public UserPW getUser(@RequestBody String name) throws UserNotFound {
         for (int i = UserList.size()-1; i>-1; i--){
@@ -54,7 +57,8 @@ public class UserPWController {
     }
 
     // 3) Удаляет пользователя по имени
-    /* curl -X DELETE http://localhost:8080/userList -H 'Content-Type: application/json' -d 'Kirill'
+    /*
+    curl -X DELETE http://localhost:8080/userList -H 'Content-Type: application/json' -d 'Kirill'
     */
     @DeleteMapping("userList")
     public void deleteUser(@RequestBody String name) throws UserNotFound, ErrorNotAdmin {
@@ -73,8 +77,9 @@ public class UserPWController {
 
 
     // 4) Обновляет пароль пользователя по имени
-    /* curl -X PUT http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"Kirill", "newPassword":"qwe123", "repeatPassword":"qwe123"}'
-    curl -X PUT http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"updateKirill", "newPassword":"qwe123", "repeatPassword":"qwe123"}'
+    /*
+    curl -X PUT http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"Kirill", "newPassword":"123", "repeatPassword":"qwe123"}'
+    curl -X PUT http://localhost:8080/userList -H 'Content-Type: application/json' -d '{"username":"updateKirill", "newPassword":"123", "repeatPassword":"qwe123"}'
      */
     @PutMapping("userList")
     public void updateUserAge(@RequestBody LoginUser newUser)
